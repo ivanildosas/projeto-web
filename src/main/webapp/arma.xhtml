@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<p:outputLabel value="Cadastro Arma"></p:outputLabel>
+	<p:outputPanel id="panelArmasCadastro">
+	<br/>
+	<br/>
+ 	<p:outputLabel id="lblNroSerie" value="Numero de Serie: "></p:outputLabel>
+	<p:inputNumber id="inputSerie" value="#{armaController.arma.numeroSerie}"/> 
+	<br/>
+	<p:outputLabel id="lblModelo" value="Modelo: "></p:outputLabel>
+	<p:inputText value="#{armaController.arma.modelo}"/>
+	<br/>
+	<p:outputLabel id="lblFabricante" value="Fabricante: "></p:outputLabel>
+	<p:inputText value="#{armaController.arma.fabricante}"/>
+	<br/>
+	<p:outputLabel id="lblCalibre" value="Calibre: "></p:outputLabel>
+	<p:inputText value="#{armaController.arma.calibre}"/>
+	<br/>
+	<br/>
+	</p:outputPanel>
+ 	<p:commandButton value="Salvar" id="bt_salvar_armar" update="@(#listaArmas)" actionListener="#{armaController.salvar}" ajax="true" process="@this"/>
+	<br/>
+	<br/>
+	<p:outputLabel value="Dados Armas"></p:outputLabel>
+	<p:outputPanel>
+		<p:dataTable id="listaArmas" var="armas" value="#{armaController.listaArmas}">
+			<p:column headerText="Ação">
+				 <p:commandLink id="cmdLinkEditarArmas" update="@(#panelArmasCadastro)" process="@this" actionListener="#{armaController.editar(armas)}">
+        			<h:outputText value="Editar" />
+   				</p:commandLink>
+   				 <p:commandLink id="cmdLinkExcluirArmas" update="@(#panelArmasCadastro)" process="@this" actionListener="#{armaController.excluir(armas)}">
+        			<h:outputText value="Excluir" />
+   				</p:commandLink>
+			</p:column>
+			<p:column headerText="Numero de Serie">
+				<h:outputText value="#{armas.numeroSerie}" />
+			</p:column>
+			
+			<p:column headerText="Modelo">
+				<h:outputText value="#{armas.modelo}" />
+			</p:column>
+			
+			<p:column headerText="Fabricante">
+				<h:outputText value="#{armas.fabricante}" />
+			</p:column>
+			
+			<p:column headerText="Calibre">
+				<h:outputText value="#{armas.calibre}" />
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<p:outputLabel value="Cadastro Municao"></p:outputLabel>
+	<p:outputPanel id="panelMunicaoCadastro">
+	<br/>
+	<br/>
+ 	<p:outputLabel id="lblMunicao" value="Calibre: "></p:outputLabel>
+	<p:inputNumber id="inputMunicaoCalibre" value="#{municaoController.municao.calibre}"/> 
+	<br/>
+	<br/>
+	</p:outputPanel>
+ 	<p:commandButton value="Salvar" id="bt_salvar_municao" update="@(#listaMunicao)" actionListener="#{municaoController.salvar}" ajax="true" process="@this"/>
+	<br/>
+	<br/>
+	<p:outputLabel value="Dados Municao"></p:outputLabel>
+	<p:outputPanel>
+		<p:dataTable id="listaMunicao" var="municao" value="#{municaoController.listaMunicao}">
+			<p:column headerText="Ação">
+				 <p:commandLink id="cmdLinkEditarArmas" update="@(#panelMunicaoCadastro)" process="@this" actionListener="#{municaoController.editar(armas)}">
+        			<h:outputText value="Editar" />
+   				</p:commandLink>
+   				 <p:commandLink id="cmdLinkExcluirArmas" update="@(#panelMunicaoCadastro)" process="@this" actionListener="#{municaoController.excluir(armas)}">
+        			<h:outputText value="Excluir" />
+   				</p:commandLink>
+			</p:column>
+			<p:column headerText="Calibre">
+				<h:outputText value="#{municao.calibre}" />
+			</p:column>
+			
+		</p:dataTable>
+	</p:outputPanel>
+</html>

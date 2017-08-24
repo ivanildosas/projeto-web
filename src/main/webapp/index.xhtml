@@ -5,17 +5,68 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<title>Projeto Web Index</title>
-</h:head>
-
-<h:body>
-	<p:panel style="text-align:center;">
-		<h:outputText value="Projeto Web" />
-		<h:form>
-			<p:commandButton actionListener="#{indexCtrl.teste()}" value="Clique aqui" />
-		</h:form>
-	</p:panel>
-</h:body>
-
+	<h:head>
+		<title>Gerenciamento Quartel</title>
+	</h:head>
+	 
+	 <h:body>
+		<p:panel style="text-align:center;">
+			<h:outputText value="Gerenciamento Quartel" />
+		</p:panel>
+		
+		<p:tabView id="tViewGeral">
+			<p:tab title="Cadastro">
+				<p:tabView id="tViewCadastro" orientation="left">
+					<p:tab title="Companhia">
+						<ui:include src="includeCompanhia.xhtml" />
+					</p:tab>
+	
+					<p:tab title="Reserva">
+						<!-- 
+							<ui:include src="/includes/reserva.xhtml" />
+						 -->
+					</p:tab>
+	
+					<p:tab title="Militar">
+						<p:outputLabel value="cadastro Militar junto com Pessoa e Usuario"></p:outputLabel>
+					</p:tab>
+	
+					<p:tab title="Item">
+						<p:tabView id="tViewItem">
+							<p:tab title="Arma">
+							<!-- 
+								<ui:include src="/includes/arma.xhtml" />
+						 	-->
+							</p:tab>
+	
+							<p:tab title="Municao">
+							<!-- 
+								<ui:include src="/includes/municao.xhtml" />
+						 	-->	
+							</p:tab>
+	
+							<p:tab title="Acessorio">
+							<!-- 
+								<ui:include src="/includes/acessorio.xhtml" />
+						 	-->
+							</p:tab>
+						</p:tabView>		
+					</p:tab>
+				</p:tabView>
+			</p:tab>
+	
+			<p:tab title="Cautela">
+				<p:tabView id="tViewCautela" orientation="left">
+					<p:tab title="Incluir Cautela">
+					</p:tab>
+	
+					<p:tab title="Consultar Cautela">
+					</p:tab>
+				</p:tabView>
+			</p:tab>
+		</p:tabView>	
+	
+		<br/>
+		
+	 </h:body>
 </html>

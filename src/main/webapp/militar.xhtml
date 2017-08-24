@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<p:outputLabel value="Cadastro Militar"></p:outputLabel>
+	<p:outputPanel id="panelReservoCadastro">
+	<br/>
+	<br/>
+ 	<p:outputLabel id="lblCompanhiaReserva" value="Companhia"></p:outputLabel>
+	<p:selectOneMenu id="oneMenuCompanhiaReserva" value="#{militarController.militar.companhia}">
+       <f:selectItems value="#{militarController.listaCompanhia}" var="comp" itemLabel="#{comp.nome}" itemValue="#{comp}"/>
+    </p:selectOneMenu>
+	<br/>
+	<p:outputLabel id="lblMilitar" value="Pessoa"></p:outputLabel>
+	<p:selectOneMenu id="oneMenuMilitaresReserva" value="#{militarController.militar.companhia}">
+       <f:selectItems value="#{militarController.listaMilitar}" var="mil" itemLabel="#{mil.nomeGuerra}" itemValue="#{mil}"/>
+    </p:selectOneMenu>
+    
+    <p:outputLabel id="lblPatente" value="Patente"></p:outputLabel>
+	<p:selectOneMenu id="console" value="#{militarController.militar.posto}" style="width:125px">
+     	<f:selectItem itemLabel="Soldado" itemValue="Soldado" />
+        <f:selectItem itemLabel="Cabo" itemValue="Cabo" />
+        <f:selectItem itemLabel="Terceiro Sargento" itemValue="3º Sgt" />
+        <f:selectItem itemLabel="Segundo Sargento" itemValue="2º Sgt" />
+        <f:selectItem itemLabel="Primeiro Sargento" itemValue="1º Sgt" />
+        <f:selectItem itemLabel="Suboficial" itemValue="Suboficial" />
+        <f:selectItem itemLabel="Aspirante" itemValue="Aspirante" />
+        <f:selectItem itemLabel="Segundo Tenente" itemValue="2°TEN" />
+        <f:selectItem itemLabel="Primeiro Tenente" itemValue="1°TEN" />
+        <f:selectItem itemLabel="Capitão" itemValue="Capitão" />
+        <f:selectItem itemLabel="Major" itemValue="Major" />
+        <f:selectItem itemLabel="Tenente-Coronel" itemValue="Tenente-Coronel" />
+        <f:selectItem itemLabel="Coronel" itemValue="Coronel" />
+        <f:selectItem itemLabel="Brigadeiro do Ar" itemValue="Brigadeiro do Ar" />
+        <f:selectItem itemLabel="Major Brigadeiro do Ar" itemValue="Major Brigadeiro do Ar" />
+        <f:selectItem itemLabel="Tenente Brigadeiro do Ar" itemValue="Tenente Brigadeiro do Ar" />
+        <f:selectItem itemLabel="Marechal do Ar" itemValue="Marechal do Ar" />
+     </p:selectOneMenu>
+	<br/>
+	<p:outputLabel id="lblNomeReserva" value="Nome de guerra: "></p:outputLabel>
+	<p:inputText id="inputCompanhiaNome" value="#{militarController.militar.nomeGuerra}" process="@this" />
+	<br />
+	</p:outputPanel>
+ 	<p:commandButton value="Salvar" id="bt_salvar_reserva" update="@(#listareservaos)" actionListener="#{militarController.salvar}" ajax="true" process="@this"/>
+	<br/>
+	<br/>
+	<p:outputLabel value="Dados reserva"></p:outputLabel>
+	<p:outputPanel>
+		<p:dataTable id="listaReserva" var="reserva" value="#{militarController.listaArmas}">
+			<p:column headerText="Ação">
+				 <p:commandLink id="cmdLinkEditarReservaos" update="@(#panelReservaCadastro)" process="@this" actionListener="#{militarController.editar(armas)}">
+        			<h:outputText value="Editar" />
+   				</p:commandLink>
+   				 <p:commandLink id="cmdLinkExcluirReserva" update="@(#panelReservaCadastro)" process="@this" actionListener="#{militarController.excluir(armas)}">
+        			<h:outputText value="Excluir" />
+   				</p:commandLink>
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{reserva.nome}" />
+			</p:column>
+			
+		</p:dataTable>
+	</p:outputPanel>
+</html>

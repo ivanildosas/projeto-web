@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h:head>
+		<title>Projeto Web Index</title>
+	</h:head>
+	
+	<h:body>
+		<p:panel style="text-align:center;">
+			<h:outputText value="Projeto Web" />
+			<h:form>
+				<p:commandButton actionListener="#{indexCtrl.teste()}" value="Teste" />
+			</h:form>
+		</p:panel>
+		
+		 <p:tabView id="tViewCadastro" orientation="left">
+	       <p:tab title="Companhia">
+		       <ui:include src="includeCompanhia.xhtml" />
+			</p:tab>
+		</p:tabView>                
+		
+		
+	</h:body>
+	
+</html>
