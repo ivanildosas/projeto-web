@@ -10,8 +10,7 @@ import entity.Companhia;
 
 public class CompanhiaRN {
 
-	@Inject
-	private CompanhiaDAOImpl companhiaDAOImpl;
+	private CompanhiaDAOImpl companhiaDAOImpl = new CompanhiaDAOImpl();
 	
 	public void salvarCompanhia(Companhia companhia) throws Exception{
 		companhiaDAOImpl.salvaCompanhia(companhia);

@@ -18,8 +18,7 @@ import javax.inject.Inject;
 
 public class CadastroFacade {
 	
-	@Inject
-	private CompanhiaRN companhiaRN;
+	private CompanhiaRN companhiaRN = new CompanhiaRN();
 	
 	@Inject
 	private ArmaRN armaRN;

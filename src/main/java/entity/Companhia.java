@@ -1,8 +1,16 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 
 @Entity
@@ -11,10 +19,9 @@ public class Companhia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	/*
-	@SequenceGenerator( name = "pk_companhia", sequenceName = "companhia_seq", allocationSize = 1 )
-	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "pk_companhia" )
-	@Column( name = "ID", nullable = false )*/
+	@SequenceGenerator( name = "COMPANHIA_SEQ_GENERATOR", sequenceName = "COMPANHIA_SEQ", allocationSize = 1 )
+	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "COMPANHIA_SEQ_GENERATOR" )
+	@Column( name = "id", nullable = false )
 	private Integer id;
 
 	private String nome;

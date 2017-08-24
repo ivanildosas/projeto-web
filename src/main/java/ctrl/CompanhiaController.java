@@ -13,8 +13,8 @@ import facade.CadastroFacade;
 @ManagedBean
 public class CompanhiaController {
 	
-	@Inject
-	private CadastroFacade cadastroFacade;
+	
+	private CadastroFacade cadastroFacade = new CadastroFacade();
 
 	private Companhia companhia = new Companhia();
 	private List<Companhia> listaCompanhias;
@@ -23,7 +23,7 @@ public class CompanhiaController {
 
 	public void salvar() {
 		System.out.println("Teste - Salvar Companhia : " + companhia.getNome());
-		/*
+		
 		try {
 			cadastroFacade.salvaCompanhia(companhia);
 			companhia = new Companhia();
@@ -31,7 +31,7 @@ public class CompanhiaController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		*/
+		
 	}
 	
 	public void editar(Companhia comp) {
