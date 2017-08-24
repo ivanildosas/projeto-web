@@ -19,7 +19,7 @@ public class JPAUtil {
 	
 	public static EntityManager getEntityManager() {
 		try {
-			if(entityManager == null) {
+			if(entityManager == null || !entityManager.isOpen()) {
 				entityManagerFactory = getEntityManagerFactory();
 				entityManager = entityManagerFactory.createEntityManager(); 
 			}

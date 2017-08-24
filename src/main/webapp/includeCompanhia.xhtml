@@ -6,16 +6,55 @@
 		xmlns:p="http://primefaces.org/ui">
 	<ui:composition>
 
-			<br/> <br/>
+		<br/> <br/>
+	
+	<p:panelGrid id="panelCompanhia">
+	
+		<h:form id="cadComp">
+			<p:growl id="growlComp" showDetail="true" life="5000"/>
 			
+			<p:panel header="Companhia">
+				<p:outputLabel for="inputCompanhiaNome" value="Nome: "/>
+				<p:inputText id="inputCompanhiaNome" value="#{companhiaController.companhia.nome}"/>	
+				<br/> <br/>
+				<p:commandButton id="btSalvarCompanhia" 
+						actionListener="#{companhiaController.salvar()}" 
+						value="Salvar"  
+						update="tViewGeral tViewGeral:tViewCadastro"
+						global="true"
+						process="@form"/>
+			</p:panel>
+		</h:form>
+		
+		<br/> <br/>
+		
+		<p:panel header="Lista de companhia(s) cadastradas">
 			
-				<br/>
-				<h:form>
-					<p:outputLabel for="inputCompanhiaNome" value="Nome: "/>
-					<p:inputText id="inputCompanhiaNome" value="#{companhiaController.companhia.nome}" process="@this" />	
-					<br/> <br/>
-					<p:commandButton id="btSalvarCompanhia" actionListener="#{companhiaController.salvar()}" value="Salvar" />
-				</h:form>
+			<p:dataTable id="listaComps" var="comp" value="#{companhiaController.listaCompanhias}">
+				
+				<p:column headerText="Nome" width="200" style="text-align:center">
+					<h:outputText value="#{comp.nome}" />
+				</p:column>
+				
+				<p:column headerText="Ação" width="200" style="text-align:center">
+					 <p:commandLink id="cmdLinkEditarCompanhia" 
+					 	update="tViewGeral:tViewCadastro:cadComp:inputCompanhiaNome" 
+					 	actionListener="#{companhiaController.editar(comp)}" process="@this">
+	        			<h:outputText value="Editar" />
+	   				</p:commandLink>
+	   				
+	   				<p:spacer width="20"></p:spacer>
+	   				
+	   				<p:commandLink id="cmdLinkExcluirCompanhia" update="tViewGeral">
+	        			<h:outputText value="Excluir" />
+	   				</p:commandLink>
+				</p:column>
+				
+			</p:dataTable>
+			
+		</p:panel>
+		
+	</p:panelGrid>
 			
 	</ui:composition>		
 </html>

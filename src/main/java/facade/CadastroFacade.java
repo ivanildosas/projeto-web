@@ -44,8 +44,8 @@ public class CadastroFacade {
 		companhiaRN.salvarCompanhia(companhia);
 	}
 	
-	public List<Companhia> todasCompanhia(){
-		return companhiaRN.todasCompanhia();
+	public List<Companhia> getListCompanhia(){
+		return companhiaRN.getListCompanhia();
 	}
 	
 	public void salvaArma(Arma arma) throws Exception{

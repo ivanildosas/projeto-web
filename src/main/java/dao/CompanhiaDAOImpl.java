@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Query;
 import org.jboss.logging.Logger;
 
 import entity.Companhia;
@@ -19,32 +20,58 @@ public class CompanhiaDAOImpl {
 		//logger.info("Construtor" + entityManagerFactory.getPersistenceUnitUtil());
 	}
 	
+	public void salvarOuAtualizarCompanhia(Companhia companhia) {
+		if (companhia.getId() != null) {
+			atualizarCompanhia(companhia);
+		}else {
+			salvaCompanhia(companhia);
+		}
+	}
+	
 	public void salvaCompanhia(Companhia companhia) {
-		
 		entityManager = JPAUtil.getEntityManager();
-		
 		entityManager.getTransaction().begin();
 		entityManager.persist(companhia);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
 	
-	public List<Companhia> buscarCompanhia(String nomeCompanhia){
-		/*Query query = (Query) session.createQuery("select * from companhia as comp where comp.nome like '%:nome%'")
-				.setResultTransformer(new AliasToBeanResultTransformer(Companhia.class));
-		query.setParameter("nome", nomeCompanhia);
-
-		return query.getResultList();*/
-		return null;
+	
+			
+	public void atualizarCompanhia(Companhia companhia) {
+		Companhia comp = buscarCompanhiaPorId(companhia);
+		companhia.setNome(companhia.getNome() + " CHANGED");
+		StringBuilder sql = new StringBuilder();
+		sql.append("update Companhia c SET c.nome = " + companhia.getNome() + " where c.id = " + companhia.getId());
+		String result;
+		
+		if(comp != null) {
+			entityManager.getTransaction().begin();
+			result = (String) entityManager.createQuery(sql.toString()).getSingleResult();
+			entityManager.close();
+		}
 	}
 	
-	public List<Companhia> todasCompanhia(){
-		/*
-		Query query = (Query) session.createQuery("select * from companhia as comp")
-				.setResultTransformer(new AliasToBeanResultTransformer(Companhia.class));
+	public Companhia buscarCompanhiaPorId(Companhia companhia){
+		entityManager = JPAUtil.getEntityManager();
+		
+		// StringBuilder sql = new StringBuilder();
+		// sql.append("update c from Companhia c where c.id = " + companhia.getId());
+		// return (Companhia) entityManager.createQuery(sql.toString()).getSingleResult();
+		return (Companhia) entityManager.find(Companhia.class, companhia.getId());
+	}
 	
-		return query.getResultList();
-		*/
-		return null;
+	public List<Companhia> buscarCompanhiaPorNome(String nomeCompanhia){
+		entityManager = JPAUtil.getEntityManager();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select c from Companhia c where c.nome like " + nomeCompanhia );
+		return (List<Companhia>) entityManager.createQuery(sql.toString()).getResultList();
+	}
+	
+	public List<Companhia> getListCompanhia(){
+		entityManager = JPAUtil.getEntityManager();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select c from Companhia c");
+		return (List<Companhia>) entityManager.createQuery(sql.toString()).getResultList();
 	}
 }

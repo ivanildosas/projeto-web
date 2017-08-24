@@ -2,23 +2,35 @@ package ctrl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import entity.Companhia;
 import facade.CadastroFacade;
 
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class CompanhiaController {
 	
 	
 	private CadastroFacade cadastroFacade = new CadastroFacade();
-
-	private Companhia companhia = new Companhia();
+	
+	private String message;
+	
+	private Companhia companhia;
 	private List<Companhia> listaCompanhias;
 	
+	@PostConstruct
+	public void init() {
+		listaCompanhias = cadastroFacade.getListCompanhia();
+		
+		if(companhia == null ||  companhia.getId() == null) {
+			companhia = new Companhia();
+		}
+	}
 	
 
 	public void salvar() {
@@ -26,8 +38,10 @@ public class CompanhiaController {
 		
 		try {
 			cadastroFacade.salvaCompanhia(companhia);
+			saveMessage();
 			companhia = new Companhia();
-			listaCompanhias = cadastroFacade.todasCompanhia();
+			listaCompanhias = cadastroFacade.getListCompanhia();
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -57,5 +71,18 @@ public class CompanhiaController {
 	public void setListaCompanhias(List<Companhia> listaCompanhias) {
 		this.listaCompanhias = listaCompanhias;
 	}
+	
+	public String getMessage() {
+        return message;
+    }
+ 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+     
+    public void saveMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastro Efetuado",  "Companhia: " + companhia.getNome() + " Cadastrada!") );
+    }
 	
 }

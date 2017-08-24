@@ -13,15 +13,15 @@ public class CompanhiaRN {
 	private CompanhiaDAOImpl companhiaDAOImpl = new CompanhiaDAOImpl();
 	
 	public void salvarCompanhia(Companhia companhia) throws Exception{
-		companhiaDAOImpl.salvaCompanhia(companhia);
+		companhiaDAOImpl.salvarOuAtualizarCompanhia(companhia);
 	}
 	
 	public List<Companhia> buscarCompanhiaNome(String nome){
-		return companhiaDAOImpl.buscarCompanhia(nome);
+		return companhiaDAOImpl.buscarCompanhiaPorNome(nome);
 	}
 	
-	public List<Companhia> todasCompanhia(){
-		return companhiaDAOImpl.todasCompanhia();
+	public List<Companhia> getListCompanhia(){
+		return companhiaDAOImpl.getListCompanhia();
 	}
 	
 }
