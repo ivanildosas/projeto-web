@@ -8,7 +8,7 @@ import javax.faces.view.ViewScoped;
 public class IndexCtrl {
 	
 	public void teste() {
-		
+		System.out.println("Teste");
 	}
 
 }

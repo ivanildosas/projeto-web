@@ -6,7 +6,19 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>projeto-web</name>
-
+	
+	<build>
+ 		<plugins>
+ 			<plugin>
+ 				<artifactId>maven-compiler-plugin</artifactId>
+ 				<configuration>
+ 					<source>1.7</source>
+ 					<target>1.7</target>
+ 				</configuration>
+ 				<version>3.1</version>
+ 			</plugin>
+ 		</plugins>
+ 	</build>
 
 	<repositories>
 		<repository>
@@ -63,11 +75,14 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
+		 -->
 
 		<!-- Hibernate -->
 		<dependency>
